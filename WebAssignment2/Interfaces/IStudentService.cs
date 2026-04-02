@@ -1,11 +1,15 @@
+using WebAssignment2.DTOs;
 using WebAssignment2.Models;
 
 namespace WebAssignment2.Interfaces
 {
     public interface IStudentService
     {
-        List<Student> GetAll();
-        Student GetById(int id);
-        void Add(Student student);
+        Task<List<Student>> GetAll();
+        Task<Student?> GetById(int id);
+        Task<List<StudentReadDto>> GetAllAsDto();
+        Task<StudentReadDto?> GetByIdAsDto(int id);
+        Task<Student> Add(Student student);
+        Task<Student?> Update(int id, Student student);
     }
 }
