@@ -6,9 +6,7 @@ using WebAssignment2.Models;
 
 namespace WebAssignment2.Controllers
 {
-    /// <summary>
-    /// Manages student-related operations in the school system.
-    /// </summary>
+
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
@@ -16,19 +14,13 @@ namespace WebAssignment2.Controllers
     {
         private readonly IStudentService _service;
 
-        /// <summary>
-        /// Initializes a new instance of the StudentController.
-        /// </summary>
-        /// <param name="service">The student service dependency.</param>
+
         public StudentController(IStudentService service)
         {
             _service = service;
         }
 
-        /// <summary>
-        /// Retrieves all students.
-        /// </summary>
-        /// <returns>A list of all students.</returns>
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -36,11 +28,7 @@ namespace WebAssignment2.Controllers
             return Ok(students);
         }
 
-        /// <summary>
-        /// Retrieves a specific student by ID.
-        /// </summary>
-        /// <param name="id">The student's unique identifier.</param>
-        /// <returns>The requested student or 404 if not found.</returns>
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -50,11 +38,7 @@ namespace WebAssignment2.Controllers
             return Ok(student);
         }
 
-        /// <summary>
-        /// Creates a new student (Admin and Instructor only).
-        /// </summary>
-        /// <param name="dto">Student creation data.</param>
-        /// <returns>The created student with HTTP 200, or validation errors with HTTP 400.</returns>
+
         [Authorize(Roles = UserRole.Admin + "," + UserRole.Instructor)]
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] StudentCreateDto dto)
@@ -67,12 +51,7 @@ namespace WebAssignment2.Controllers
             return Ok(result);
         }
 
-        /// <summary>
-        /// Updates an existing student (Admin and Instructor only).
-        /// </summary>
-        /// <param name="id">The student's unique identifier.</param>
-        /// <param name="dto">Student update data.</param>
-        /// <returns>The updated student or 404 if not found.</returns>
+
         [Authorize(Roles = UserRole.Admin + "," + UserRole.Instructor)]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] StudentUpdateDto dto)

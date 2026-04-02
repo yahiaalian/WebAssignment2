@@ -22,7 +22,6 @@ namespace WebAssignment2.Services
 
         public async Task<User?> Register(string username, string email, string password)
         {
-            // Check if user already exists
             if (await _context.Users.AnyAsync(u => u.Username == username || u.Email == email))
                 return null;
 
@@ -45,7 +44,6 @@ namespace WebAssignment2.Services
             if (user == null)
                 return null;
 
-            // Verify password
             if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
                 return null;
 
